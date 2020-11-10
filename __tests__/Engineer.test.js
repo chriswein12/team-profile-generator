@@ -1,5 +1,3 @@
-const { TestScheduler } = require('jest');
-const Employee = require('../lib/Employee');
 const Engineer = require('../lib/Engineer');
 
 test('creates an Engineer object with a github username', () => {
