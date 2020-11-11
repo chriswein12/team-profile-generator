@@ -3,6 +3,7 @@ const Engineer = require('./lib/Engineer');
 const Manager = require('./lib/Manager');
 const Intern = require('./lib/Intern');
 const fs = require('fs');
+const htmlGenerator = require('./src/html-generator')
 
 const team = []
 
@@ -44,28 +45,30 @@ init = () => {
     addTeamMember = () => {
         inquirer.prompt(
             {
-            type: "list",
-            name: "chooseTeam",
-            message: "Would you like to add a team member? Select option.",
-            choices: [
-                "Engineer",
-                "Intern",
-                "No more team members to add"
-            ]
+                type: "list",
+                name: "chooseTeam",
+                message: "Would you like to add a team member? Select option.",
+                choices: [
+                    "Engineer",
+                    "Intern",
+                    "No more team members to add"
+                ]
             }
         )
-        .then(selection => {
-            if (selection.chooseTeam === "Engineer") {
-                addEngineer();
-            }
-            else if (selection.chooseTeam === "Intern") {
-                addIntern();
-            }
-            else {
-                createHTML();
-            }
-        });
+            .then(selection => {
+                if (selection.chooseTeam === "Engineer") {
+                    addEngineer();
+                }
+                else if (selection.chooseTeam === "Intern") {
+                    addIntern();
+                }
+                else {
+                   createHtml(team);
+                }
+            })
+
     }
+    
 
     addEngineer = () => {
         inquirer.prompt([
@@ -92,7 +95,6 @@ init = () => {
         ])
             .then(responses => {
                 const engineer = new Engineer(responses.eId, responses.eName, responses.eEmail, responses.eGithub);
-                console.log(engineer);
 
                 team.push(engineer);
                 addTeamMember();
@@ -124,16 +126,23 @@ init = () => {
         ])
             .then(responses => {
                 const intern = new Intern(responses.iId, responses.iName, responses.iEmail, responses.iSchool);
-                console.log(intern);
-
+ 
                 team.push(intern);
                 addTeamMember();
             });
-        }
-
-    createHTML = () => {
-        console.log(team);
     }
+
+    createHtml = data => {
+        fs.writeFile('./dist/index.html', htmlGenerator(data), err => {
+            if (err) throw new Error(err);
+        })
+        console.log(`
+            ==========
+            HTML has been created.
+            ==========
+            `)
+    }
+
 
     addManager();
 
