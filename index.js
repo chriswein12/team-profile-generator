@@ -4,6 +4,7 @@ const Manager = require('./lib/Manager');
 const Intern = require('./lib/Intern');
 const fs = require('fs');
 const htmlGenerator = require('./src/html-generator')
+const validator = require("email-validator");
 
 const team = []
 
@@ -24,14 +25,14 @@ init = () => {
                   }
             },
             {
-                type: 'number',
+                type: 'input',
                 name: 'mId',
                 message: "What is the manager's ID number?",
                 validate: answer => {
-                    if (answer !== NaN) {
-                      return true;
+                    if (isNaN(answer) || answer === "") {
+                      return "Please enter numeric ID.";
                     }
-                    return "Please enter numeric ID.";
+                    return true;
                   }
             },
             {
@@ -39,17 +40,22 @@ init = () => {
                 name: 'mEmail',
                 message: "What is the manager's email address?",
                 validate: answer => {
-                    if (answer !== "") {
+                    if (validator.validate(answer)) {
                       return true;
                     }
                     return "Please enter email.";
                   }
             },
             {
-                type: 'number',
+                type: 'input',
                 name: 'mOfficeNumber',
-                message: "What is the manager's office number?"
-                
+                message: "What is the manager's office number?",
+                validate: answer => {
+                    if (isNaN(answer) || answer === "") {
+                      return "Please enter numeric office number.";
+                    }
+                    return true;
+                  }               
             },
         ])
             .then(responses => {
@@ -94,22 +100,46 @@ init = () => {
             {
                 type: 'input',
                 name: 'eName',
-                message: "What is the engineer's name?"
+                message: "What is the engineer's name?",
+                validate: answer => {
+                    if (answer !== "") {
+                      return true;
+                    }
+                    return "Please enter engineer's name.";
+                  }
             },
             {
                 type: 'number',
                 name: 'eId',
-                message: "What is the engineer's ID?"
+                message: "What is the engineer's ID?",
+                validate: answer => {
+                    if (isNaN(answer) || answer === "") {
+                      return "Please enter numeric ID.";
+                    }
+                    return true;
+                  }
             },
             {
                 type: 'input',
                 name: 'eEmail',
-                message: "What is the engineer's email address?"
+                message: "What is the engineer's email address?",
+                validate: answer => {
+                    if (validator.validate(answer)) {
+                      return true;
+                    }
+                    return "Please enter email.";
+                  }
             },
             {
                 type: 'input',
                 name: 'eGithub',
-                message: "What is the engineer's github profile name?"
+                message: "What is the engineer's GitHub profile name?",
+                validate: answer => {
+                    if (answer !== "") {
+                      return true;
+                    }
+                    return "Please enter GitHub profile name.";
+                  }
             },
         ])
             .then(responses => {
@@ -125,22 +155,46 @@ init = () => {
             {
                 type: 'input',
                 name: 'iName',
-                message: "What is the intern's name?"
+                message: "What is the intern's name?",
+                validate: answer => {
+                    if (answer !== "") {
+                      return true;
+                    }
+                    return "Please enter intern's name.";
+                  }
             },
             {
-                type: 'number',
+                type: 'input',
                 name: 'iId',
-                message: "What is the intern's ID?"
+                message: "What is the intern's ID?",
+                validate: answer => {
+                    if (isNaN(answer) || answer === "") {
+                      return "Please enter numeric ID.";
+                    }
+                    return true;
+                  }
             },
             {
                 type: 'input',
                 name: 'iEmail',
-                message: "What is the intern's email address?"
+                message: "What is the intern's email address?",
+                validate: answer => {
+                    if (validator.validate(answer)) {
+                      return true;
+                    }
+                    return "Please enter email.";
+                  }
             },
             {
                 type: 'input',
                 name: 'iSchool',
-                message: "What is the intern's school?"
+                message: "What is the intern's school?",
+                validate: answer => {
+                    if (answer !== "") {
+                      return true;
+                    }
+                    return "Please enter school.";
+                  }
             },
         ])
             .then(responses => {
