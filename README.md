@@ -44,8 +44,7 @@ https://github.com/chriswein12/team-profile-generator
 ## How the application works
 Click on the following image for a walkthrough video on Youtube.
 
-[![Link to Walkthrough Video](http://img.youtube.com/watch?v=YgIF8aslJmA/0.jpg)](https://youtu.be/YgIF8aslJmA "Team Profile Generator with Node.js")
-
+[![Link to Walkthrough Video](http://img.youtube.com/vi/YgIF8aslJmA/0.jpg)](http://www.youtube.com/watch?v=YgIF8aslJmA "Team Profile Generator with Node.js")
 
 <br/>
 
