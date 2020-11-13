@@ -8,6 +8,7 @@ const validator = require("email-validator");
 
 const team = []
 
+// Main function that prompts user and collects responses
 init = () => {
     console.log('You will use this app to build a team starting with a manager');
 
@@ -60,13 +61,13 @@ init = () => {
         ])
             .then(responses => {
                 const manager = new Manager(responses.mId, responses.mName, responses.mEmail, responses.mOfficeNumber);
-                console.log(manager);
 
                 team.push(manager);
                 addTeamMember();
             });
     };
 
+    // After adding manager, user will return to this prompt each time a new employee is added
     addTeamMember = () => {
         inquirer.prompt(
             {
@@ -205,6 +206,7 @@ init = () => {
             });
     }
 
+    // Function which passes the responses to the htmlGenerator, and then prints the file.
     createHtml = data => {
         fs.writeFile('./dist/index.html', htmlGenerator(data), err => {
             if (err) throw new Error(err);
