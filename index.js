@@ -15,22 +15,41 @@ init = () => {
             {
                 type: 'input',
                 name: 'mName',
-                message: "What is the manager's name?"
+                message: "What is the manager's name?",
+                validate: answer => {
+                    if (answer !== "") {
+                      return true;
+                    }
+                    return "Please enter manager's name.";
+                  }
             },
             {
                 type: 'number',
                 name: 'mId',
-                message: "What is the manager's ID?"
+                message: "What is the manager's ID number?",
+                validate: answer => {
+                    if (answer !== NaN) {
+                      return true;
+                    }
+                    return "Please enter numeric ID.";
+                  }
             },
             {
                 type: 'input',
                 name: 'mEmail',
-                message: "What is the manager's email address?"
+                message: "What is the manager's email address?",
+                validate: answer => {
+                    if (answer !== "") {
+                      return true;
+                    }
+                    return "Please enter email.";
+                  }
             },
             {
                 type: 'number',
                 name: 'mOfficeNumber',
                 message: "What is the manager's office number?"
+                
             },
         ])
             .then(responses => {
